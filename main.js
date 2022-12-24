@@ -62,7 +62,7 @@ function setup() {
     canvas.mouseClicked(clicked)
 	background('#87CEEB')
     mainTree = new tree(1800 / 2, 100)
-    b1 = color(0,191,255);
+    b1 = color(0,138,216);
     b2 = color(230,230,250);
 }
 
