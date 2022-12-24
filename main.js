@@ -48,11 +48,11 @@ function init () {
 }
 
 function setup() {
-	let canvas = createCanvas(1667, 724)
+	let canvas = createCanvas(1800, 724)
     canvas.parent('canvasForHTML')
     canvas.mouseClicked(clicked)
 	background('#87CEEB')
-    mainTree = new tree(1667 / 2, 100)
+    mainTree = new tree(1800 / 2, 100)
 }
 
 function clicked() {
