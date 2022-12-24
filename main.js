@@ -142,7 +142,7 @@ function saveTree() {
 
     // stars
     if(stars.length > 0)
-         db.setData(treeCode + '/star', stars)
+         db.setData(treeCode + '/stars', stars)
 
 }
 
