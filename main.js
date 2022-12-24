@@ -17,6 +17,10 @@ let yellowballs= []
 let blueballs= []
 let stars = []
 
+const Y_AXIS = 1;
+const X_AXIS = 2;
+let b1, b2, c1, c2;
+
 
 
 preload();
@@ -58,6 +62,8 @@ function setup() {
     canvas.mouseClicked(clicked)
 	background('#87CEEB')
     mainTree = new tree(1800 / 2, 100)
+    b1 = color(0,191,255);
+    b2 = color(230,230,250);
 }
 
 function clicked() {
@@ -142,7 +148,7 @@ function saveTree() {
 
 
 function draw() {
-    background('#87CEEB')
+    setGradient(0, 0, 1800, 724, b1, b2, Y_AXIS);
 	mainTree.draw()
 
     // redballs
@@ -202,6 +208,30 @@ async function preload(){
         }
     }
 }
+
+//gradient background
+function setGradient(x, y, w, h, c1, c2, axis) {
+    noFill();
+  
+    if (axis === Y_AXIS) {
+      // Top to bottom gradient
+      for (let i = y; i <= y + h; i++) {
+        let inter = map(i, y, y + h, 0, 1);
+        let c = lerpColor(c1, c2, inter);
+        stroke(c);
+        line(x, i, x + w, i);
+      }
+    } else if (axis === X_AXIS) {
+      // Left to right gradient
+      for (let i = x; i <= x + w; i++) {
+        let inter = map(i, x, x + w, 0, 1);
+        let c = lerpColor(c1, c2, inter);
+        stroke(c);
+        line(i, y, i, y + h);
+      }
+    }
+  }
+  
 
 window.setup = setup
 window.draw = draw

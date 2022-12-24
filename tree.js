@@ -12,6 +12,9 @@ tree.prototype.draw = function(){
     triangle(this.xp - 140, this.yp + 250, this.xp, this.yp + 75, this.xp + 140, this.yp + 250)
     triangle(this.xp - 190, this.yp + 375, this.xp, this.yp + 100, this.xp + 190, this.yp + 375)
     triangle(this.xp - 250, this.yp + 500, this.xp, this.yp + 150, this.xp + 250, this.yp + 500)
+
+    //background
+    
 }
 
 export default tree;
