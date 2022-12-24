@@ -3,7 +3,7 @@ import db from './db.js'
 import tree from './tree.js'
 import redball from './redball.js'
 import yellowball from './yellowball.js'
-
+import blueball from './blueball.js'
 
 let treeCode = localStorage.getItem('tree')
 document.getElementById('tree-code').innerText = 'TREE CODE: ' + treeCode;
@@ -13,7 +13,8 @@ let currUtil = ""
 let mainTree = {}
 let redballs = []
 let yellowballs= []
-// blueballs
+let blueballs= []
+
 // stars
 
 
@@ -38,7 +39,8 @@ function init () {
 	yellowballBtn.addEventListener('click', () => { currUtil = 'yellowball' })
 
     // blueballBtn
-
+    let blueballBtn = document.getElementById('blueball')
+	blueballBtn.addEventListener('click', () => { currUtil = 'blueball' })
 
     // starBtn
 
@@ -71,7 +73,9 @@ function clicked() {
     }
 
     // blueball
-
+    if(currUtil == 'blueball'){
+        blueballs.push(new blueball(mouseX, mouseY))
+    }
 
     // star
 
@@ -90,7 +94,7 @@ function removeObj(mouseX, mouseY){
     }
 
     // yellowballs
-    for(let i = 0; i < redballs.length; i++){
+    for(let i = 0; i < yellowballs.length; i++){
         if(yellowballs[i]['xp'] >= mouseX - 10 && yellowballs[i]['xp'] <= mouseX + 10 && 
             yellowballs[i]['yp'] >= mouseY - 10 && yellowballs[i]['yp'] <= mouseY + 10){
                 yellowballs.splice(i, 1)
@@ -98,8 +102,12 @@ function removeObj(mouseX, mouseY){
     }
 
     // blueballs
-
-
+    for(let i = 0; i < blueballs.length; i++){
+        if(blueballs[i]['xp'] >= mouseX - 10 && blueballs[i]['xp'] <= mouseX + 10 && 
+            blueballs[i]['yp'] >= mouseY - 10 && blueballs[i]['yp'] <= mouseY + 10){
+                blueballs.splice(i, 1)
+            }
+    }
     // stars
 }
 
@@ -113,7 +121,8 @@ function saveTree() {
         db.setData(treeCode + '/yellowballs', yellowballs)
     
     // blueballs
-
+    if(blueballs.length > 0)
+         db.setData(treeCode + '/blueballs', blueballs)
 
     // stars
 
@@ -136,7 +145,9 @@ function draw() {
     }
 
     // blueballs
-
+    for(let i = 0; i < blueballs.length; i++){
+        blueballs[i].draw()
+    }
 
     // stars
 }
@@ -164,7 +175,11 @@ async function preload(){
 
 
     // blueballs
-
+    if(currTree.blueballs){
+        for(let i = 0; i < currTree.blueballs.length; i++){
+            blueballs.push(new blueball(currTree.blueballs[i]['xp'], currTree.blueballs[i]['yp']))
+        }
+    }
 
     // stars
 }
