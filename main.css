@@ -1,10 +1,47 @@
-*{
+* {
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    padding-top: 20px;
+    height: 50px;
+    background-color: #e5d1b6;
+    font-size: 30px;
+    color:#800020;
+}
+ 
+li {
+    display: inline;
+    cursor: pointer;
+}
+
 
 #canvasForHTML {
     margin: auto;
     width: 1800px;
     height: 724px;
+}
+
+#util {
+    height: 80px;
+    padding: 40px 120px 40px 120px;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    text-align: center;
+    padding-top: 15px;
+    font-size:18x;
+    height:40px;
+    background-color:black;
+    color:aliceblue;
+    position:absolute;
+    bottom:0;
+    width:100%;
 }

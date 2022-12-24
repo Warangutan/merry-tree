@@ -12,26 +12,27 @@
 
     <script defer type="module" src="main.js"></script>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
     <link rel="stylesheet" href="./main.css">
 
     <title>Merry Tree</title>
   </head>
   <body>
-    <navbar>
-      <div id="home">[home-icon]</div>
-      <div id="guide">[?-icon]</div>
-      <h1>Merry Tree</h1>
-      <div id="tree-code">TREE CODE: abc123</div>
-    </navbar>
+    <ul>
+      <li style="float:left; margin-left: 20px;" id="home">🏠</li>
+      <li style="float:left; margin-left: 20px;" id="guide">❔</li>
+      <li><span style="margin-left: 780px; font-weight: 600; font-family: Lobster">Merry Tree</span></li>
+      <li style="float:right; padding-right: 20px; font-weight: 600;" id="tree-code">TREE CODE: abc123</li>
+    </ul>
       <div id="canvasForHTML"></div>
-    <div>
-      <div id="redball">[redball]</div>
-      <div id="yellowball">[yellowball]</div>
-      <div id="blueball">[blueball]</div>
-      <div id="star">[star]</div>
-      <div id="remove">[remove]</div>
-      <div id="save">[save]</div>
-    </div>
+    <ul id="util">
+      <li id="redball">🔴</li>
+      <li id="yellowball">🟡</li>
+      <li id="blueball">🔵</li>
+      <li id="star">⭐</li>
+      <li id="remove">❌</li>
+      <li id="save">💾</li>
+    </ul>
     <footer>
       Powered with 💖 by Team Tree
     </footer>
