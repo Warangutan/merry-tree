@@ -4,6 +4,7 @@ import tree from './tree.js'
 import redball from './redball.js'
 import yellowball from './yellowball.js'
 import blueball from './blueball.js'
+import star from './star.js'
 
 let treeCode = localStorage.getItem('tree')
 document.getElementById('tree-code').innerText = 'TREE CODE: ' + treeCode;
@@ -14,9 +15,7 @@ let mainTree = {}
 let redballs = []
 let yellowballs= []
 let blueballs= []
-
-// stars
-
+let stars = []
 
 
 
@@ -43,6 +42,8 @@ function init () {
 	blueballBtn.addEventListener('click', () => { currUtil = 'blueball' })
 
     // starBtn
+    let starBtn = document.getElementById('star')
+	starBtn.addEventListener('click', () => { currUtil = 'star' })
 
 
     let removeBtn = document.getElementById('remove')
@@ -78,6 +79,9 @@ function clicked() {
     }
 
     // star
+    if(currUtil == 'star'){
+        stars.push(new star(mouseX, mouseY))
+    }
 
     if(currUtil == 'remove'){
         removeObj(mouseX, mouseY);
@@ -109,6 +113,12 @@ function removeObj(mouseX, mouseY){
             }
     }
     // stars
+    for(let i = 0; i < stars.length; i ++){
+        if(stars[i]['xp'] >= mouseX - 40 && stars[i]['xp'] <= mouseX + 40 &&
+        stars[i]['yp'] >= mouseY - 40 && stars[i]['yp'] <= mouseY + 40){
+            stars.splice(i, 1)
+        }
+    }
 }
 
 function saveTree() {
@@ -125,7 +135,8 @@ function saveTree() {
          db.setData(treeCode + '/blueballs', blueballs)
 
     // stars
-
+    if(stars.length > 0)
+         db.setData(treeCode + '/star', stars)
 
 }
 
@@ -150,6 +161,9 @@ function draw() {
     }
 
     // stars
+    for(let i = 0; i < stars.length; i++){
+        stars[i].draw()
+    }
 }
 
 
@@ -182,6 +196,11 @@ async function preload(){
     }
 
     // stars
+    if(currTree.stars){
+        for(let i = 0; i < currTree.stars.length; i++){
+            stars.push(new star(currTree.stars[i]['xp'], currTree.stars[i]['yp']))
+        }
+    }
 }
 
 window.setup = setup
