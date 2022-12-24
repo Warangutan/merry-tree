@@ -2,6 +2,7 @@ import db from './db.js'
 
 import tree from './tree.js'
 import redball from './redball.js'
+import yellowball from './yellowball.js'
 
 
 let treeCode = localStorage.getItem('tree')
@@ -11,7 +12,7 @@ let currUtil = ""
 
 let mainTree = {}
 let redballs = []
-// yellowballs
+let yellowballs= []
 // blueballs
 // stars
 
@@ -33,7 +34,8 @@ function init () {
 	redballBtn.addEventListener('click', () => { currUtil = 'redball' })
 
     // yellowballBtn
-
+    let yellowballBtn = document.getElementById('yellowball')
+	yellowballBtn.addEventListener('click', () => { currUtil = 'yellowball' })
 
     // blueballBtn
 
@@ -64,7 +66,9 @@ function clicked() {
     }
 
     // yellowball
-
+    if(currUtil == 'yellowball'){
+        yellowballs.push(new yellowball(mouseX, mouseY))
+    }
 
     // blueball
 
@@ -86,7 +90,12 @@ function removeObj(mouseX, mouseY){
     }
 
     // yellowballs
-
+    for(let i = 0; i < redballs.length; i++){
+        if(yellowballs[i]['xp'] >= mouseX - 10 && yellowballs[i]['xp'] <= mouseX + 10 && 
+            yellowballs[i]['yp'] >= mouseY - 10 && yellowballs[i]['yp'] <= mouseY + 10){
+                yellowballs.splice(i, 1)
+            }
+    }
 
     // blueballs
 
@@ -100,7 +109,8 @@ function saveTree() {
         db.setData(treeCode + '/redballs', redballs)
 
     // yellowballs
-    
+    if(yellowballs.length > 0)
+        db.setData(treeCode + '/yellowballs', yellowballs)
     
     // blueballs
 
@@ -121,7 +131,9 @@ function draw() {
     }
 
     // yellowballs
-
+    for(let i = 0; i < yellowballs.length; i++){
+        yellowballs[i].draw()
+    }
 
     // blueballs
 
@@ -144,6 +156,11 @@ async function preload(){
     }
 
     // yellowballs
+    if(currTree.yellowballs){
+        for(let i = 0; i < currTree.yellowballs.length; i++){
+            yellowballs.push(new yellowball(currTree.yellowballs[i]['xp'], currTree.yellowballs[i]['yp']))
+        }
+    }
 
 
     // blueballs
